@@ -3,7 +3,13 @@ module I18n
     module Node
       module Derivation
         def append(node)
-          derive(children: node.children.put(node.key, node))
+          derive(children: children.put(node.key, node))
+        end
+
+        def append_at(path, node)
+          return append(node) if !path || path.empty?
+          key, rest = path.split('.', 2)
+          derive(children: children.put(key, children[key].append_at(rest, node)))
         end
 
         def derive(klass: self.class, **attr)

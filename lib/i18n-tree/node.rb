@@ -72,16 +72,13 @@ module I18n
       end
 
       def append(node)
-        log_warn "Appending node #{node.inspect} to a leaf node #{inspect}, type changed."
+        log_warn "Adding child #{node.inspect} to a leaf #{inspect}."
         super node
       end
 
-      def derive(attr: Hamster::EmptyHash, klass: self.class)
-        if !attr[:children].empty?
-          log_warn "Deriving a node with children from a leaf node #{inspect}, type changed."
-          klass = Node
-        end
-        super attr: attr, klass: klass
+      def derive(klass: self.class, **attr)
+        attr[:klass] = IntermediateNode if !attr[:children].empty?
+        super **attr
       end
 
       def inspect(level: 0)

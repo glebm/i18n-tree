@@ -7,3 +7,5 @@ end
 $: << File.expand_path('../lib', __FILE__)
 
 require 'i18n-tree'
+
+T = I18n::Tree

@@ -1,7 +1,7 @@
 module I18n
   module Tree
     module Node
-      # arbitrary data a la jQuery.fn.data
+      # arbitrary data associated with the node (a la jQuery.fn.data)
       module Data
         attr_reader :data
 

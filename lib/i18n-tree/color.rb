@@ -15,7 +15,7 @@ module I18n
         end
 
         def colorize_cycle(s, i)
-          Term::ANSIColor.color i % 15, s
+          Term::ANSIColor.color 1 + i % 15, s
         end
       end
     end

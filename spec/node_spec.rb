@@ -14,14 +14,12 @@ describe 'Node' do
          'c'        => 1,
          'd'        => [1, 2]}}
   }
-  let(:test_tree) {
-    I18n::Tree[test_hash]
-  }
+  let(:test_tree) { T[test_hash] }
 
   it '#t' do
     expect(test_tree.t('es.greeting')).to eq('Hola %{name}')
     expect(test_tree.t('en.home')).to eq('title' => 'My page')
-    expect { test_tree.t('none') }.to raise_error(I18n::Tree::NodeNotFoundError)
+    expect { test_tree.t('none') }.to raise_error(T::NodeNotFoundError)
   end
 
   it '#at' do
@@ -32,7 +30,7 @@ describe 'Node' do
   it '#merge' do
     a = I18n::Tree['en' => {'blog' => {'title' => 'Blog'}}]
     b = I18n::Tree['en' => {'blog' => {'subtitle' => 'Recent posts'}}]
-    expect(a.merge(b)).to eq(I18n::Tree[{"en"=>{"blog"=>{"subtitle"=>"Recent posts", "title"=>"Blog"}}}])
+    expect(a.merge(b)).to eq(T[{'en' => {'blog' => {'subtitle' => 'Recent posts', 'title' => 'Blog'}}}])
   end
 
   it '#to_h' do
